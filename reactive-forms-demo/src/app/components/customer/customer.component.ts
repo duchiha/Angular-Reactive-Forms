@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
-signUpForm: FormGroup;
+  signUpForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.signUpForm = new FormGroup({
-           firstName:new FormControl(),
-         lastName: new FormControl(),
-         email: new FormControl(),
-         sendCatalog: new FormControl(true),
+    this.signUpForm = this.fb.group({
+      firstName: '',
+      lastName: '',
+      email: '',
     })
   }
 
-  save():void{
+  save(): void {
     console.log('Saving...');
   }
 
