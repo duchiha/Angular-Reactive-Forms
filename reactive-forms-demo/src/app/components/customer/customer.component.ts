@@ -15,6 +15,7 @@ export class CustomerComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
+      sendCatalog: true,
     })
   }
 
@@ -23,6 +24,7 @@ export class CustomerComponent implements OnInit {
       firstName: 'Fire',
       lastName: 'Fist',
       email: 'fire.fist@gmail.com',
+      sendCatalog: true,
     })
   }
 
