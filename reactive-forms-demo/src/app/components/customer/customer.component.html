@@ -10,7 +10,7 @@
                 <label class="col-md-2 col-form-label" for="firstNameId">First Name</label>
                 <div class="col-md-8">
                     <input class="form-control" id="firstNameId" type="text" placeholder="First Name (required)"
-                        required minlength="3" formControlName="firstName"
+                        formControlName="firstName"
                         [ngClass]="{'is-invalid': (signUpForm.get('firstName').touched || signUpForm.get('firstName').dirty) && !signUpForm.get('firstName').valid }" />
                     <span class="invalid-feedback">
                         <span *ngIf="signUpForm.get('firstName').errors?.required">
@@ -26,8 +26,8 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="lastNameId">Last Name</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="lastNameId" type="text" placeholder="Last Name (required)" required
-                        maxlength="50" formControlName="lastName"
+                    <input class="form-control" id="lastNameId" type="text" placeholder="Last Name (required)"
+                        formControlName="lastName"
                         [ngClass]="{'is-invalid': (signUpForm.get('lastName').touched || signUpForm.get('lastName').dirty) && !signUpForm.get('lastName').valid }" />
                     <span class="invalid-feedback">
                         <span *ngIf="signUpForm.get('lastName').errors?.required">
@@ -43,7 +43,7 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="emailId">Email</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="emailId" type="email" placeholder="Email (required)" required email
+                    <input class="form-control" id="emailId" type="email" placeholder="Email (required)"
                         formControlName="email"
                         [ngClass]="{'is-invalid': (signUpForm.get('email').touched || signUpForm.get('email').dirty) && !signUpForm.get('email').valid }" />
                     <span class="invalid-feedback">
