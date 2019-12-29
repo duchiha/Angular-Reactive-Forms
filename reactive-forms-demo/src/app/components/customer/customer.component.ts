@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -12,9 +12,11 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     this.signUpForm = this.fb.group({
-      firstName: ['',[Validators.required, Validators.minLength(3)]],
-      lastName: ['',[Validators.required, Validators.maxLength(50)]],
-      email: ['',[Validators.required,Validators.email]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: '',
+      notification: 'email',
       sendCatalog: true,
     })
   }
@@ -36,6 +38,16 @@ export class CustomerComponent implements OnInit {
 
   save(): void {
     console.log('Saving...');
+  }
+
+  setNotification(notificationType: string) {
+    const phoneControl = this.signUpForm.get('phone');
+    if (notificationType === 'text') {
+      phoneControl.setValidators(Validators.required);
+    } else {
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
   }
 
 }
