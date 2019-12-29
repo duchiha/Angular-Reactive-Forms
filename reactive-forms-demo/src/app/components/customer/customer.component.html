@@ -57,58 +57,58 @@
                 </div>
             </div>
             <div class="form-group row mb-2">
-                <label class="col-md-2 col-form-label"
-                       for="phoneId">Phone</label>
+                <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
                 <div class="col-md-8">
-                  <input class="form-control"
-                         id="phoneId"
-                         type="tel"
-                         placeholder="Phone"
-                         formControlName="phone"
-                         [ngClass]="{'is-invalid': !signUpForm.get('phone').valid }" />
-                  <span class="invalid-feedback">
-                    <span *ngIf="signUpForm.get('phone').errors?.required">
-                      Please enter your phone number.
+                    <input class="form-control" id="phoneId" type="tel" placeholder="Phone" formControlName="phone"
+                        [ngClass]="{'is-invalid': !signUpForm.get('phone').valid }" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.get('phone').errors?.required">
+                            Please enter your phone number.
+                        </span>
                     </span>
-                  </span>
                 </div>
-              </div>
-        
-              <div class="form-group row mb-2">
+            </div>
+
+            <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label pt-0">Send Notifications</label>
                 <div class="col-md-8">
-                  <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                      <input class="form-check-input"
-                             type="radio"
-                             value="email"
-                             formControlName="notification"
-                             (click)="setNotification('email')">Email
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                      <input class="form-check-input"
-                             type="radio"
-                             value="text"
-                             formControlName="notification"
-                             (click)="setNotification('text')">Text
-                    </label>
-                  </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" value="email" formControlName="notification"
+                                (click)="setNotification('email')">Email
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" value="text" formControlName="notification"
+                                (click)="setNotification('text')">Text
+                        </label>
+                    </div>
                 </div>
-              </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="ratingId">Rating</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="ratingId" type="number" formControlName="rating" [ngClass]="{'is-invalid': (signUpForm.get('rating').touched || 
+                                                     signUpForm.get('rating').dirty) && 
+                                                     !signUpForm.get('rating').valid }" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.get('rating').errors?.range">
+                            Please rate your experience from 1 to 5.
+                        </span>
+                    </span>
+                </div>
+            </div>
             <div class="form-group row mb-2">
                 <div class="col-md-8">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="form-check-input"
-                             id="sendCatalogId"
-                             type="checkbox"
-                             formControlName="sendCatalog"> Send me your catalog
-                    </label>
-                  </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" id="sendCatalogId" type="checkbox"
+                                formControlName="sendCatalog"> Send me your catalog
+                        </label>
+                    </div>
                 </div>
-              </div>
+            </div>
 
             <div class="form-group row mb-2">
                 <div class="offset-md-2 col-md-4">
