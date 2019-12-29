@@ -40,20 +40,43 @@
                 </div>
             </div>
 
-            <div class="form-group row mb-2">
-                <label class="col-md-2 col-form-label" for="emailId">Email</label>
-                <div class="col-md-8">
-                    <input class="form-control" id="emailId" type="email" placeholder="Email (required)"
-                        formControlName="email"
-                        [ngClass]="{'is-invalid': (signUpForm.get('email').touched || signUpForm.get('email').dirty) && !signUpForm.get('email').valid }" />
-                    <span class="invalid-feedback">
-                        <span *ngIf="signUpForm.get('email').errors?.required">
-                            Please enter your email address.
+            <div formGroupName="emailGroup">
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="emailId">Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="emailId" type="email" placeholder="Email (required)"
+                            formControlName="email" [ngClass]="{'is-invalid': signUpForm.get('emailGroup').errors ||
+                                                     ((signUpForm.get('emailGroup.email').touched || 
+                                                      signUpForm.get('emailGroup.email').dirty) && 
+                                                      !signUpForm.get('emailGroup.email').valid) }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="signUpForm.get('emailGroup.email').errors?.required">
+                                Please confirm your email address.
+                            </span>
+                            <span *ngIf="signUpForm.get('emailGroup.email').errors?.match">
+                                The confirmation does not match the email address.
+                            </span>
                         </span>
-                        <span *ngIf="signUpForm.get('email').errors?.email">
-                            Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="confirmEmailId">Confirm Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control" id="confirmEmailId" type="email"
+                            placeholder="Confirm Email (required)" formControlName="confirmEmail" [ngClass]="{'is-invalid': signUpForm.get('emailGroup').errors ||
+                                                     ((signUpForm.get('emailGroup.confirmEmail').touched || 
+                                                      signUpForm.get('emailGroup.confirmEmail').dirty) && 
+                                                      !signUpForm.get('emailGroup.confirmEmail').valid) }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="signUpForm.get('emailGroup.confirmEmail').errors?.required">
+                                Please confirm your email address.
+                            </span>
+                            <span *ngIf="signUpForm.get('emailGroup').errors?.match">
+                                The confirmation does not match the email address.
+                            </span>
                         </span>
-                    </span>
+                    </div>
                 </div>
             </div>
             <div class="form-group row mb-2">
