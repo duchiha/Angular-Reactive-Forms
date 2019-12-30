@@ -30,7 +30,8 @@ function ratingRange(min: number, max: number): ValidatorFn {
 })
 export class CustomerComponent implements OnInit {
   signUpForm: FormGroup;
-
+  
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -46,6 +47,12 @@ export class CustomerComponent implements OnInit {
       rating: [null, ratingRange(1,5)],
       sendCatalog: true,
     })
+    this.signUpForm.get('notification').valueChanges.subscribe(
+      value =>{
+        console.log('watching for changes, the current value is: '+ value),
+        this.setNotification(value)
+      }
+    )
   }
 
   save(): void {
