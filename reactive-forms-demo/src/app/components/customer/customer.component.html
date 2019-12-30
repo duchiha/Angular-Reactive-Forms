@@ -45,17 +45,9 @@
                     <label class="col-md-2 col-form-label" for="emailId">Email</label>
                     <div class="col-md-8">
                         <input class="form-control" id="emailId" type="email" placeholder="Email (required)"
-                            formControlName="email" [ngClass]="{'is-invalid': signUpForm.get('emailGroup').errors ||
-                                                     ((signUpForm.get('emailGroup.email').touched || 
-                                                      signUpForm.get('emailGroup.email').dirty) && 
-                                                      !signUpForm.get('emailGroup.email').valid) }" />
+                            formControlName="email" [ngClass]="{'is-invalid': emailMessage }" />
                         <span class="invalid-feedback">
-                            <span *ngIf="signUpForm.get('emailGroup.email').errors?.required">
-                                Please confirm your email address.
-                            </span>
-                            <span *ngIf="signUpForm.get('emailGroup.email').errors?.match">
-                                The confirmation does not match the email address.
-                            </span>
+                           {{emailMessage}}
                         </span>
                     </div>
                 </div>
