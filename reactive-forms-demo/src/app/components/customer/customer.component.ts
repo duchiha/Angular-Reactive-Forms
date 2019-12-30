@@ -48,21 +48,6 @@ export class CustomerComponent implements OnInit {
     })
   }
 
-  defaultValues(): void {
-    this.signUpForm.setValue({
-      firstName: 'Fire',
-      lastName: 'Fist',
-      email: 'fire.fist@gmail.com',
-      sendCatalog: true,
-    })
-  }
-
-  emailDefaultValues(): void {
-    this.signUpForm.patchValue({
-      email: 'fire.fist@gmail.com',
-    })
-  }
-
   save(): void {
     console.log('Saving...');
   }
