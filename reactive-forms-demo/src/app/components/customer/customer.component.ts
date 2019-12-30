@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators'; 
 
 function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
   const emailControl = c.get('email');
@@ -31,7 +32,7 @@ function ratingRange(min: number, max: number): ValidatorFn {
 export class CustomerComponent implements OnInit {
   signUpForm: FormGroup;
   emailMessage: string;
-  
+
   private validationMessages = {
     required: 'Please enter your email address.',
     email: 'Please enter a valid email address.'
@@ -61,7 +62,9 @@ export class CustomerComponent implements OnInit {
     )
 
     const emailControl = this.signUpForm.get('emailGroup.email');
-    emailControl.valueChanges.subscribe(
+    emailControl.valueChanges.pipe(
+      debounceTime(10000)
+    ).subscribe(
       value => this.setMessage(emailControl)
     );
   }
