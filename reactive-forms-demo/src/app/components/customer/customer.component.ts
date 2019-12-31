@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators'; 
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
   const emailControl = c.get('email');
@@ -32,13 +32,16 @@ function ratingRange(min: number, max: number): ValidatorFn {
 export class CustomerComponent implements OnInit {
   signUpForm: FormGroup;
   emailMessage: string;
+  get addresses(): FormArray{
+  return <FormArray>this.signUpForm.get('addresses');
+  } ;
 
   private validationMessages = {
     required: 'Please enter your email address.',
     email: 'Please enter a valid email address.'
   };
-  
-  
+
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -46,18 +49,19 @@ export class CustomerComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       emailGroup: this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required]],
-      }, {validator: emailMatcher}),
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', [Validators.required]],
+      }, { validator: emailMatcher }),
       phone: '',
       notification: 'email',
-      rating: [null, ratingRange(1,5)],
+      rating: [null, ratingRange(1, 5)],
       sendCatalog: true,
+      addresses:this.fb.array([this.buildAdress()]),
     })
     this.signUpForm.get('notification').valueChanges.subscribe(
-      value =>{
-        console.log('watching for changes, the current value is: '+ value),
-        this.setNotification(value)
+      value => {
+        console.log('watching for changes, the current value is: ' + value),
+          this.setNotification(value)
       }
     )
 
@@ -71,6 +75,21 @@ export class CustomerComponent implements OnInit {
 
   save(): void {
     console.log('Saving...');
+  }
+  
+  addAddress():void{
+  this.addresses.push(this.buildAdress());
+  }
+  
+  buildAdress(): FormGroup {
+    return this.fb.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      zip: '',
+    });
   }
 
   setMessage(c: AbstractControl): void {
